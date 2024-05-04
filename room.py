@@ -25,7 +25,7 @@ class Room:
         for key, value in numered_exits.items():
             if value:
                 possible_exits.append(value)
-        print("\nWyjścia: ")
+        print("\nWyjścia z tej komnaty prowdzą do: ")
         #print(possible_exits)
         i = 1
         #odp = ("a", "b", "c", "d")
@@ -57,23 +57,39 @@ def enter_room(room):
         current_room = room
         print(f"\nWchodzisz do: {current_room.name}")
         current_room.describe_room()
-        possible_exits = current_room.list_exits()
         if current_room == room_3:
-            answer = input("Chcesz wskoczyć do dziury?")
-            if answer == "tak":
-                print("GAME OVER")
-                sys.exit()
-        try:
-            answer = int(input("Wybierz wyjscie: "))
+            answer = input("Chcesz wskoczyć do dziury? (tak/nie) ")
+            possible_answers = ("tak", "nie")
+            while answer not in possible_answers:
+                answer = input(f"Wybierz spośród: {possible_answers}: ")
+            if answer in possible_answers:
+                if answer == "tak":
+                    print("GAME OVER")
+                    sys.exit()
+        possible_exits = current_room.list_exits()
+        possible_answers = []
+        counter = 1
+        answer = 0
+        for i in possible_exits:
+            possible_answers.append(counter)
+            counter += 1
+        answer = int(input(f"Wybierz wyjscie z komnaty: "))
+        if answer not in possible_answers:
+            while answer not in possible_answers:
+                answer = int(input(f"Wybierz wyjscie spośród {possible_answers}: "))
+                if answer in possible_answers:
+                    destination = possible_exits[answer - 1]
+                    break
+        else:
             destination = possible_exits[answer - 1]
-        except (ValueError, IndexError):
-            print("Nieprawidłowy numer odpowiedzi.")
+
         next_room = getattr(__import__(__name__), destination)
         print(next_room.name)
         enter_room(next_room)
 
 current_room = room_1
 enter_room(current_room)
+
 
 
 
