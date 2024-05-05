@@ -42,19 +42,16 @@ class Room:
 
 
 room_1 = Room("Komnata z głazem", "W komnacie znajduje się głaz.")
-room_1.set_exits({"północ": None, "zachód": None, "południe": None, "wschód": "room_2"})
-
 room_2 = Room("Komnata z fontanną", "W komnacie znajduje się fontanna krwi.")
-room_2.set_exits({"północ": None, "zachód": "room_1", "południe": None, "wschód": "room_3"})
-
 room_3 = Room("Komnata z dziurą", "W tej komnacie znajduje się dziura.")
-room_3.set_exits({"północ": None, "zachód": "room_2", "południe": "room_5", "wschód": "room_4"})
-
 room_4 = Room("Komnata Skarbów", "W komnacie znajduje się skarbiec.")
-room_4.set_exits({"północ": None, "zachód": None, "południe": None, "wschód": "room_3"})
-
 room_5 = Room("Kryształowa komnata", "Znajdujesz się w kryształowej komnacie.")
-room_5.set_exits({"północ": "room_3", "zachód": None, "południe": None, "wschód": None})
+
+room_1.set_exits({"północ": None, "zachód": None, "południe": None, "wschód": room_2})
+room_2.set_exits({"północ": None, "zachód": room_1, "południe": None, "wschód": room_3})
+room_3.set_exits({"północ": None, "zachód": room_2, "południe": room_5, "wschód": room_4})
+room_4.set_exits({"północ": None, "zachód": None, "południe": None, "wschód": room_3})
+room_5.set_exits({"północ": room_3, "zachód": None, "południe": None, "wschód": None})
 
 
 def enter_room(room):
@@ -88,11 +85,19 @@ def enter_room(room):
             destination = possible_exits[answer - 1]
 
         next_room = getattr(__import__(__name__), destination)
-        print(next_room.name)
+        print(f"--Current room: {current_room.name}")
+        print(f"--Next room: {next_room.name}")
+        #return current_room , next_room
         enter_room(next_room)
 
 current_room = room_1
 enter_room(current_room)
+
+
+def create_room():
+
+    random_room = Room("Losowa komnata", "Jesteś w losowej komnacie.")
+    random_room.set_exits({"północ": None, "zachód": None, "południe": None, "wschód": None})
 
 
 
