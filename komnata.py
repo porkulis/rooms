@@ -42,8 +42,8 @@ def create_room():
     komnaty.append(komnata)
 
     #print(f"\nTworzę komnatę o nazwie: {komnata.name}")
-    print(f"\nTworzę komnata {komnata.number}")
-    print(len(komnaty))
+    # print(f"\nTworzę komnata {komnata.number}") #Test
+    # print(f"len(komnaty) = {len(komnaty)}") #Test
 
 
 def change_room(room):
@@ -52,41 +52,49 @@ def change_room(room):
     possible_exits = []
 
     print("_____________________________________________________________")
-    print(f"Twoim oczom ukazuje się {current_room.name} - Komnata [{current_room.number}].")
+    print(f"Twoim oczom ukazuje się {current_room.name.title()} (Komnata {current_room.number}).")
     print(f"{current_room.description}")
 
     if current_room not in visited_rooms:
-        print("Jesteś tu po raz pierwszy.")
+        print("\nJesteś tu po raz pierwszy.")
     else:
-        print("Już tu byłeś.")
+        print("\nJuż tu byłeś.")
     if current_room not in visited_rooms:
         visited_rooms.append(current_room)
     #print(f"   Odwiedzone komnaty: {visited_rooms}")
 
     print("\nMożliwe wyjścia:")
+    numerator = 1
     for key, value in current_room.exits.items():
-        if value is not None:
-            print(f"   - {key}: {value.number} {value.name}")
-            possible_exits.append(value)
+        # if value is not None:
+        #     print(f"   - {key}: {value.number} {value.name}")
+        #     possible_exits.append(value)
+        if value != None:
+            print(f" --> {numerator}. {key}: {value.name.title()} (Komnata {value.number})")
+            numerator += 1
+        else:
+            print(f"     {numerator}. {key}: Brak")
+            numerator += 1
     return current_room
 
 
 def choose_direction():
     global dest
     ans = 0
-    while ans not in ["w", "s", "a", "d"]:
-        ans = input("\n(W-północ, S-południe, A-zachód, D-wschód, Q-zakończ grę) \nWybierz wyjście: ")
+    while ans not in ["1", "2", "3", "4"]:
+        #print(f"\nWybór kierunku: 1, 2, 3, 4 lub Q by zakończyć grę.")
+        ans = input("\nWybierz wyjście: ")
         if ans == "q":
             ans = input("Czy na pewno chcesz zakończyć grę? (y/n): ")
             if ans == "y":
                 print("\nZrobisz mi herbkę? :)\n")
                 sys.exit()
-        elif ans == "w":
+        elif ans == "1":
             dest = "północ"
-        elif ans == "s":
-            dest = "południe"
-        elif ans == "a":
-            dest = "zachód"
-        elif ans == "d":
+        elif ans == "2":
             dest = "wschód"
+        elif ans == "3":
+            dest = "południe"
+        elif ans == "4":
+            dest = "zachód"
     return dest
