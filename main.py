@@ -12,10 +12,11 @@ current_room = komnata  #ustawienie początkowej lokacji gracza
 
 #Stworzenie pozostałych komnat i ścieżek
 
+#-------------------------------------------------------------------------------------------------------------
 previous_choice = [1]
 exits_choice = [1]
 
-for n in range(20):
+for n in range(2):
     create_room()
 
     exits_options = [["północ", "południe"], ["południe", "północ"], ["wschód", "zachód"], ["zachód", "wschód"]]
@@ -41,6 +42,7 @@ for n in range(20):
     komnaty[len(komnaty)-2].exits[exits_choice[0]] = komnaty[len(komnaty)-1] #wyjscie ze stworzonej komnaty
 
     komnaty[len(komnaty)-1].exits[exits_choice[1]] = komnaty[len(komnaty)-2] #wyście dla poprzedniej komnaty
+#-------------------------------------------------------------------------------------------------------------
 
 #sys.exit()
 
@@ -84,3 +86,27 @@ while True:
     elif dest in directions:
         print(f"Ruszasz na {dest}.")
         current_room = change_room(int(possible_exits[dest]))
+    print(f"\nLicznik komnat: ({current_room.number}/{(len(komnaty)-1)})")
+    #print(current_room)
+    #print(visited_rooms)
+
+    #if current_room.number == len(komnaty)-1:
+    if current_room not in visited_rooms[:-1]:
+        print("Tworzę nową komnatę.")
+        create_room()
+
+        exits_options = [["północ", "południe"], ["południe", "północ"], ["wschód", "zachód"], ["zachód", "wschód"]]
+
+        if len(komnaty) <= 2:
+            exits_choice = exits_options[0]
+            previous_choice = exits_choice
+        elif len(komnaty) > 2:
+            exits_choice = exits_options[random.randint(0, 3)]
+            while previous_choice[1] == exits_choice[0]:
+                exits_choice = exits_options[random.randint(0, 3)]
+        if previous_choice[1] == exits_choice[0]:
+            print("ERRRRRRRRRROOOOOOOOOOOR")  
+        previous_choice = exits_choice
+
+        komnaty[len(komnaty)-2].exits[exits_choice[0]] = komnaty[len(komnaty)-1] #wyjscie ze stworzonej komnaty
+        komnaty[len(komnaty)-1].exits[exits_choice[1]] = komnaty[len(komnaty)-2] #wyście dla poprzedniej komnaty
