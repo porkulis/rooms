@@ -1,6 +1,8 @@
 import random
 import sys
 import os
+
+
 clear = lambda: os.system('cls')
 
 
@@ -50,8 +52,8 @@ def change_room(room):
     clear()
     print(f"Znajdujesz się w: [Komnata {current_room.number}] - '{current_room.name.title()}' Licznik komnat: ({current_room.number}/{(len(komnaty)-1)})")
     print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n")
-    print(f"Twoim oczom ukazuje się {current_room.name.title()} (Komnata {current_room.number}).")
-    print(f"{current_room.description}")
+    print(f"Twoim oczom ukazuje się {current_room.name.title()}.")
+    print(f"  {current_room.description}")
 
     if current_room not in visited_rooms:
         print("\nJesteś tu po raz pierwszy.")

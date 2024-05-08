@@ -4,13 +4,61 @@ import time
 
 #main##############################################
 clear()
-print("\nWitaj w grze \"Arena Śmierci VII\"\n")
-time.sleep(3)
+# print("\nWitaj w grze \"Arena Śmierci VII\"\n")
+# time.sleep(3)
+
+def create_room():
+    komnata = Komnata(f"{create_name()}", len(komnaty), f"{create_description()}.")
+    komnaty.append(komnata)
+
+def change_room(room):
+    current_room = komnaty[room]
+
+    possible_exits = []
+    clear()
+    print(f"Znajdujesz się w: [Komnata {current_room.number}] - '{current_room.name.title()}' - Licznik komnat: ({current_room.number}/{(len(komnaty)-1)}) By zakończyć grę wciśnij \"q\"")
+    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n")
+    print(f"Twoim oczom ukazuje się {current_room.name.title()}.")
+    print(f"  {current_room.description}")
+
+    if current_room not in visited_rooms:
+        print("\nJesteś tu po raz pierwszy.")
+    else:
+        print("\nJuż tu byłeś.")
+    if current_room not in visited_rooms:
+        visited_rooms.append(current_room)
+
+    print("\nMożliwe wyjścia:")
+    numerator = 1
+    goback = 0
+   
+    if dest == "północ":
+        goback = "południe"
+    elif dest == "południe":
+        goback = "północ"
+    elif dest == "zachód":
+        goback = "wschód"
+    elif dest == "wschód":
+        goback = "zachód"
+
+    for key, value in current_room.exits.items():
+        if value != None:
+            if key == goback:
+                print(f"  <--powrót {numerator}. {key}: {value.name.title()} (Komnata {value.number})")
+            else:
+                print(f"  dalej---> {numerator}. {key}: {value.name.title()} (Komnata {value.number})")
+            numerator += 1
+        else:
+            print(f"            {numerator}. {key}: x")
+            numerator += 1
+    return current_room
 
 #Stworzenie pierwszej komnaty
-komnata = Komnata(f"Komnata z Drzwiami", 0, f"Znajdują się tutaj potężne drewniane drzwi prowadzące na wschód.")
+komnata = Komnata(f"Komnata z Drzwiami", 0, f"Znajdują się tutaj potężne drewniane drzwi prowadzące do labiryntu.")
 komnaty.append(komnata)
 current_room = komnata  #ustawienie początkowej lokacji gracza
+
+
 
 #Stworzenie pozostałych komnat i ścieżek
 
@@ -59,9 +107,9 @@ for n in range(2):
 #     i += 1
 
 #sys.exit()
-
+dest = 0
 current_room = change_room(0)
-
+last_dest = []
 while True:
     directions = []
     possible_exits = {}
