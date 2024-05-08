@@ -2,7 +2,7 @@ from komnata import *
 #main##############################################
 
 #Stworzenie pierwszej komnaty
-komnata = Komnata(f"sala wejściowa", 0, f"Znajdują się tutaj potężne drewniane drzwi prowadzące na wschód.")
+komnata = Komnata(f"Komnata z Drzwiami", 0, f"Znajdują się tutaj potężne drewniane drzwi prowadzące na wschód.")
 komnaty.append(komnata)
 current_room = komnata #ustawienie początkowej lokacji gracza
 
