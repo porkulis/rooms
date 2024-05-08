@@ -1,5 +1,7 @@
 import random
 import sys
+import os
+clear = lambda: os.system('cls')
 
 
 class Komnata:
@@ -45,8 +47,9 @@ def change_room(room):
     current_room = komnaty[room]
 
     possible_exits = []
-
-    print("_____________________________________________________________")
+    clear()
+    print(f"Znajdujesz się w: [Komnata {current_room.number}] - '{current_room.name.title()}' Licznik komnat: ({current_room.number}/{(len(komnaty)-1)})")
+    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n")
     print(f"Twoim oczom ukazuje się {current_room.name.title()} (Komnata {current_room.number}).")
     print(f"{current_room.description}")
 

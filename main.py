@@ -1,14 +1,14 @@
 from komnata import *
+import time
+
 
 #main##############################################
+clear()
 print("\nWitaj w grze \"Arena Śmierci VII\"\n")
+time.sleep(3)
 
 #Stworzenie pierwszej komnaty
-<<<<<<< HEAD
 komnata = Komnata(f"Komnata z Drzwiami", 0, f"Znajdują się tutaj potężne drewniane drzwi prowadzące na wschód.")
-=======
-komnata = Komnata(f"sala wejściowa", 0, f"Znajdują się tutaj potężne drewniane drzwi prowadzące wgłąb labiryntu.")
->>>>>>> losowe_wyjscia
 komnaty.append(komnata)
 current_room = komnata  #ustawienie początkowej lokacji gracza
 
@@ -78,11 +78,11 @@ while True:
     elif dest in directions:
         print(f"Ruszasz na {dest}.")
         current_room = change_room(int(possible_exits[dest]))
-    print(f"\nLicznik komnat: ({current_room.number}/{(len(komnaty)-1)})")
+    #print(f"\nLicznik komnat: ({current_room.number}/{(len(komnaty)-1)})")
 
     #if current_room.number == len(komnaty)-1:
     if current_room not in visited_rooms[:-1]:
-        print("Tworzę nową komnatę.")
+        #print("Tworzę nową komnatę.")
         create_room()
 
         exits_options = [["północ", "południe"], ["południe", "północ"], ["wschód", "zachód"], ["zachód", "wschód"]]
