@@ -41,11 +41,6 @@ def create_room():
     komnata = Komnata(f"{create_name()}", len(komnaty), f"{create_description()}.")
     komnaty.append(komnata)
 
-    #print(f"\nTworzę komnatę o nazwie: {komnata.name}")
-    # print(f"\nTworzę komnata {komnata.number}") #Test
-    # print(f"len(komnaty) = {len(komnaty)}") #Test
-
-
 def change_room(room):
     current_room = komnaty[room]
 
@@ -61,14 +56,10 @@ def change_room(room):
         print("\nJuż tu byłeś.")
     if current_room not in visited_rooms:
         visited_rooms.append(current_room)
-    #print(f"   Odwiedzone komnaty: {visited_rooms}")
 
     print("\nMożliwe wyjścia:")
     numerator = 1
     for key, value in current_room.exits.items():
-        # if value is not None:
-        #     print(f"   - {key}: {value.number} {value.name}")
-        #     possible_exits.append(value)
         if value != None:
             print(f" --> {numerator}. {key}: {value.name.title()} (Komnata {value.number})")
             numerator += 1

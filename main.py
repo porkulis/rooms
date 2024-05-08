@@ -6,8 +6,6 @@ print("\nWitaj w grze \"Arena Śmierci VII\"\n")
 #Stworzenie pierwszej komnaty
 komnata = Komnata(f"sala wejściowa", 0, f"Znajdują się tutaj potężne drewniane drzwi prowadzące wgłąb labiryntu.")
 komnaty.append(komnata)
-# print(f"\nTworzę komnata {komnata.number}") #Test
-# print(f"len(komnaty) = {len(komnaty)}") #Test
 current_room = komnata  #ustawienie początkowej lokacji gracza
 
 #Stworzenie pozostałych komnat i ścieżek
@@ -23,16 +21,11 @@ for n in range(2):
 
     if len(komnaty) <= 2:
         exits_choice = exits_options[0]
-        #print(f"{exits_choice} Komnata {len(komnaty)-1}") #Test
         previous_choice = exits_choice
     elif len(komnaty) > 2:
         exits_choice = exits_options[random.randint(0, 3)]
-        #print(f"{exits_choice} Komnata {len(komnaty)-1}") #Test
-        # if previous_choice[1] == exits_choice[0]:
-        #     print("ERRRRRRRRRROOOOOOOOOOOR")
         while previous_choice[1] == exits_choice[0]:
             exits_choice = exits_options[random.randint(0, 3)]
-            #print(f"{exits_choice} Komnata {len(komnaty)-1}") #Test
     if previous_choice[1] == exits_choice[0]:
         print("ERRRRRRRRRROOOOOOOOOOOR")  
     previous_choice = exits_choice
@@ -64,20 +57,15 @@ for n in range(2):
 #sys.exit()
 
 current_room = change_room(0)
-#print(f"\n\nCurrent room: {current_room.name}")
-#print(current_room.exits)
 
 while True:
     directions = []
     possible_exits = {}
     for key, value in current_room.exits.items():
         if value != None:
-            #print(f"kierunek: {key}, nazwa: {value.name}, index: {komnaty.index(value)}, instancja: {value}")
             n = komnaty.index(value)
             directions.append(key)
             possible_exits[key] = komnaty.index(value)
-    #print(directions)
-    #print(possible_exits)
 
     dest = choose_direction()
 
@@ -87,8 +75,6 @@ while True:
         print(f"Ruszasz na {dest}.")
         current_room = change_room(int(possible_exits[dest]))
     print(f"\nLicznik komnat: ({current_room.number}/{(len(komnaty)-1)})")
-    #print(current_room)
-    #print(visited_rooms)
 
     #if current_room.number == len(komnaty)-1:
     if current_room not in visited_rooms[:-1]:
