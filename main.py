@@ -46,7 +46,7 @@ def change_room(room):
             if key == goback:
                 print(f"  <--powrót {numerator}. {key}: {value.name.title()} (Komnata {value.number})")
             else:
-                print(f"  dalej---> {numerator}. {key}: {value.name.title()} (Komnata {value.number})")
+                print(f"  --------> {numerator}. {key}: {value.name.title()} (Komnata {value.number})")
             numerator += 1
         else:
             print(f"            {numerator}. {key}: x")
